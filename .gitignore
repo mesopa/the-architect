@@ -1,0 +1,13 @@
+# Ignore everything in the root except the "_dev" directory.
+/*
+!.gitignore
+!.csscomb.json
+!_dev/
+!_dist/
+
+!gulpfile.js
+!package.json
+!README.md
+
+# Ignore everything in the "_dist" directory.
+_dist/*

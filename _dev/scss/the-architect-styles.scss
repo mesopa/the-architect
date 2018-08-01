@@ -1,0 +1,301 @@
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Color Scheme
+2.0 Typography
+3.0 Layout
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.0 Color Scheme
+--------------------------------------------------------------*/
+
+$primary-color: #000000;
+$secondary-color: #ffffff;
+$mesopa-color: #d90429;
+
+/*--------------------------------------------------------------
+2.0 Typography
+--------------------------------------------------------------*/
+
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 400;
+}
+
+.display
+{
+  &.one
+  {
+    font-size: 3.6rem;
+
+    @media ( min-width: 40rem )
+    {
+      font-size: 5.6rem;
+    }
+  }
+
+  &.two
+  {
+    font-size: 2.6rem;
+  }
+
+  &.three
+  {
+    font-size: 2.0rem;
+  }
+}
+
+.center
+{
+  text-align: center;
+}
+
+/*--------------------------------------------------------------
+3.0 Layout
+--------------------------------------------------------------*/
+
+.white
+{
+  color: $secondary-color;
+}
+
+.margin
+{
+  &.bottom
+  {
+    &.zero
+    {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.fixed
+{
+  &.top
+  {
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  &.bottom
+  {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.z-5
+{
+  z-index: 5;
+}
+
+.z-10
+{
+  z-index: 10;
+}
+
+.z-20
+{
+  z-index: 20;
+}
+
+.image
+{
+  &.wrap
+  {
+    margin-top: 3.0rem;
+
+    figure
+    {
+      margin: 0;
+
+      img
+      {
+        border: 1.6rem solid $secondary-color;
+        vertical-align: bottom;
+      }
+
+      figcaption
+      {
+        font-size: 1.4rem;
+        padding-left: 1.0rem;
+        padding-top: 1.0rem;
+      }
+    }
+  }
+}
+
+.white
+{
+  &.strippe
+  {
+    background-color: $secondary-color;
+    height: 3.0rem;
+  }
+}
+
+.large
+{
+  &.link
+  {
+    &.mesopa
+    {
+      display: inline-block;
+      font-size: 2.0rem;
+      font-weight: 300;
+      letter-spacing: 0.5rem;
+      margin-top: 2.0rem;
+    }
+  }
+}
+
+.license
+{
+  &.wrap
+  {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    max-width: 440px;
+    width: 100%;
+  }
+}
+
+.header
+{
+  &.wrap
+  {
+    background-color: $secondary-color;
+    padding-bottom: 1.6rem;
+    padding-top: 1.6rem;
+    transition: all 0.2s ease-in-out;
+
+    h1
+    {
+      color: lighten( $primary-color, 60% );
+      font-size: 5.6rem;
+      letter-spacing: 0.5rem;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  &.floating
+  {
+    background-color: $primary-color;
+    padding-bottom: 1.0rem;
+    padding-top: 1.0rem;
+
+    h1
+    {
+      color: $secondary-color;
+      font-size: 3.0rem;
+    }
+  }
+}
+
+.article
+{
+  &.wrap
+  {
+    background-color: lighten( $primary-color, 95% );
+    border-left: 3.0rem solid $secondary-color;
+    border-right: 3.0rem solid $secondary-color;
+    padding-bottom: 3.0rem;
+    padding-top: 3.0rem;
+    position: relative;
+
+    h2
+    {
+      color: $primary-color;
+      font-family: "Roboto",Arial, Helvetica, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.2rem;
+      margin-top: 4.0rem;
+    }
+  }
+}
+
+.footer
+{
+  &.wrap
+  {
+    background-color: lighten( $primary-color, 10% );
+    border-bottom: 3.0rem solid $secondary-color;
+    border-left: 3.0rem solid $secondary-color;
+    border-right: 3.0rem solid $secondary-color;
+    min-height: 200px;
+    padding-bottom: 3.0rem;
+
+    h3
+    {
+      letter-spacing: 0.5rem;
+    }
+
+    a
+    {
+      color: $mesopa-color;
+
+      &:focus, &:hover
+      {
+        color: lighten( $primary-color, 30%);
+      }
+    }
+  }
+}
+
+
+.footer
+{
+  .sub
+  {
+    &.wrap
+    {
+      background-color: lighten( $primary-color, 5% );
+      padding-bottom: 1.0rem;
+      padding-top: 1.0rem;
+    }
+  }
+}
+
+.footer
+{
+  &.wrap
+  {
+    .social
+    {
+      &.link
+      {
+        background: none;
+        border: 2px solid $secondary-color;
+        border-radius: 50%;
+        color: lighten( $primary-color, 50%);
+        display: inline-block;
+        font-size: 2.0rem;
+        height: 50px;
+        margin: 0 0.5rem;
+        padding: 7px 0 0 0;
+        transition: background 0.2s ease-in-out;
+        width: 50px;
+
+        &:focus, &:hover
+        {
+          background: $secondary-color;
+          color: $mesopa-color;
+        }
+      }
+    }
+  }
+}
