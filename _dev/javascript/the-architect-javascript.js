@@ -56,4 +56,14 @@ $(document).ready( function(){
     'rel': 'stylesheet',
     'href': 'assets/css/the-architect-styles-fonts.min.css'
   }).appendTo('head');
+
+});
+
+// =============
+// CloudImage.io
+// =============
+document.addEventListener('DOMContentLoaded', function() {
+  jScaler.process({
+    TOKEN: 'avuwkbizn'
+  });
 });
