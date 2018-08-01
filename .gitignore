@@ -3,11 +3,8 @@
 !.gitignore
 !.csscomb.json
 !_dev/
-!_dist/
+!docs/
 
 !gulpfile.js
 !package.json
 !README.md
-
-# Ignore everything in the "_dist" directory.
-_dist/*
