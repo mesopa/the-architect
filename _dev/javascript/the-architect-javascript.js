@@ -12,7 +12,8 @@ $(document).ready( function(){
     var header_height       = $('.header.wrap').outerHeight();
     var article_padding_top = 30;
 
-    $('.article.wrap').css( 'margin-top', header_height + article_padding_top );
+    $('.article.wrap, .section.fourohfour, .section.offline')
+        .css( 'margin-top', header_height + article_padding_top );
   }
 
   set_main_margin_top();
@@ -25,7 +26,8 @@ $(document).ready( function(){
     var footer_height       = $('.footer.wrap').outerHeight();
     var article_padding_bottom = 0;
 
-    $('.article.wrap').css( 'margin-bottom', footer_height + article_padding_bottom );
+    $('.article.wrap, .section.fourohfour, .section.offline')
+        .css( 'margin-bottom', footer_height + article_padding_bottom );
   }
 
   set_main_margin_bottom();

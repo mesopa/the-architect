@@ -32,6 +32,8 @@
   <meta name="twitter:title" content="The Architect | MeSopa Minisite | Pedro Serapio" />
   <meta name="twitter:image" content="https://mesopa.com/the-architect/assets/images/common/the-architect-opengraph.jpg" />
 
+  <link rel="manifest" href="/the-architect/manifest.json">
+
   <link rel="stylesheet" href="../tmp/compiled-css/the-architect-vendor.min.css" inline>
   <link rel="stylesheet" href="../tmp/compiled-css/the-architect-styles.min.css" inline>
 </head>
@@ -201,7 +203,7 @@
       <div class="sub wrap">
         <h3 class="display two margin bottom zero">The Architect</h3>
       </div>
-      <p><a href="" title="" class="large link mesopa">mesopa.com</a></p>
+      <p><a href="https://mesopa.com/" title="MeSopa" target="_blank" class="large link mesopa">mesopa.com</a></p>
       <p>
         <a href="https://www.linkedin.com/in/pedroserapio/" title="Pedro Serapio LinkedIn" target="_blank" rel="noopener" class="social link"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://github.com/mesopa" title="Pedro Serapio GitHub" target="_blank" rel="noopener" class="social link"><i class="fab fa-github-alt"></i></a>
@@ -213,6 +215,19 @@
   </footer>
 
   <div class="white strippe fixed bottom z-10"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(registration) {
+          console.log('Service Worker registration successful with scope: ',
+          registration.scope);
+        })
+        .catch(function(err) {
+          console.log('Service Worker registration failed: ', err);
+        });
+    }
+  </script>
 
   <script defer src="assets/js/the-architect-all.min.js"></script>
 </body>

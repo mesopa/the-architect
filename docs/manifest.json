@@ -1,0 +1,21 @@
+{
+  "short_name": "Architect",
+  "name": "The Architect",
+  "icons": [
+    {
+      "src": "/the-architect/assets/images/common/icons/icon192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/the-architect/assets/images/common/icons/icon512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/the-architect/?source=pwa",
+  "background_color": "#000000",
+  "display": "standalone",
+  "scope": "/the-architect/",
+  "theme_color": "#000000"
+}

@@ -94,6 +94,12 @@ gulp.task('js', () => {
     .pipe( gulp.dest( temp + '/compiled-js' ) );
 });
 
+// -- PWA Progressive APP --
+gulp.task('pwa', () => {
+  return gulp.src( src + '/pwa/*' )
+    .pipe( gulp.dest( dist ));
+});
+
 // -- SASS   --
 gulp.task('sass', () => {
   return gulp.src( paths.sass )
@@ -180,6 +186,7 @@ gulp.task(
     gulp.start(
       'connect',
       'assets',
+      'pwa',
       'font-awesome',
       'concat-js',
       'inline-css',
