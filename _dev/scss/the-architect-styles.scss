@@ -123,10 +123,10 @@ h1, h2, h3, h4, h5, h6
     {
       margin: 0;
 
-      img
-      {
-        border: 1.6rem solid $secondary-color;
-        vertical-align: bottom;
+      .image-content {
+        background-color: $secondary-color;
+        padding: 1.6rem;
+        display: block;
       }
 
       figcaption

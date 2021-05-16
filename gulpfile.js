@@ -3,15 +3,14 @@
 // Project Variables
 // -----------------
 
-const gulp         = require('gulp'),
-      sass         = require('gulp-sass'),
-      prefixer     = require('gulp-autoprefixer'),
+const { src, dest, series, parallel, watch } = require('gulp');
+
+const sass         = require('gulp-sass'),
       minifyCSS    = require('gulp-clean-css'),
       rename       = require('gulp-rename'),
       concat       = require('gulp-concat'),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
-      replace      = require('gulp-replace'),
       inlinesource = require('gulp-inline-source'),
       del          = require('del'),
       
@@ -21,31 +20,32 @@ const theme_name   = 'the-architect',
       theme_suffix = '';
 
 const base_path  = '',
-      src        = base_path + '_dev',
+      source     = base_path + '_dev',
       dist       = base_path + 'docs',
       temp       = base_path + '_dev/tmp',
       paths      = {
         vendor_js:   [
           'node_modules/jquery/dist/jquery.min.js',
-          src + '/javascript/cloudimage.io-responsive.js',
+          source + '/javascript/js-cloudimage-responsive.min.js',
         ],
         vendor_css:  [
           'node_modules/normalize.css/normalize.css',
           'node_modules/milligram/dist/milligram.min.css',
+          source + '/css/js-cloudimage-responsive.min.css',
         ],
         vendor_css_AMP: [
           'node_modules/milligram/dist/milligram.min.css',
         ],
         js:   [
-          src + '/javascript/' + theme_name + '-javascript.js',
+          source + '/javascript/' + theme_name + '-javascript.js',
         ],
         sass: [
-          src + '/scss/' + theme_name + '-styles.scss',
-          src + '/scss/' + theme_name + '-styles-fonts.scss',
+          source + '/scss/' + theme_name + '-styles.scss',
+          source + '/scss/' + theme_name + '-styles-fonts.scss',
         ],
         sass_AMP: [
-          src + '/scss/' + theme_name + '-styles.scss',
-          src + '/scss/' + theme_name + '-styles-fonts.scss',
+          source + '/scss/' + theme_name + '-styles.scss',
+          source + '/scss/' + theme_name + '-styles-fonts.scss',
         ]
       };
 
@@ -54,89 +54,80 @@ const base_path  = '',
 // -------------
 
 // Local Server
-gulp.task('connect', () => {
+function connectServer() {
   connect.server({
     root: dist,
     livereload: true
   });
-});
+};
 
 // -- CLEAN 'dist' --
-gulp.task('clean-dist', () => {
+function cleanDist() {
   return del( dist + '/*' );
-});
+};
 
 // -- CLEAN 'tmp' --
-gulp.task('clean-tmp', () => {
+function cleanTmp() {
   return del( temp + '/*' );
-});
+};
 
 // -- ASSETS --
-gulp.task('assets', () => {
-  return gulp.src( src + '/assets/**/**/**/*' )
-    .pipe( gulp.dest( dist + '/assets/' ) );
-});
+function assets() {
+  return src( source + '/assets/**/**/**/*' )
+    .pipe( dest( dist + '/assets/' ) );
+};
 
 // -- Font Awesome   --
-gulp.task('font-awesome', () => {
-  return gulp.src( 'node_modules/@fortawesome/fontawesome-free/webfonts/*' )
-    .pipe( gulp.dest( dist + '/assets/fonts/font-awesome/' ) );
-});
+function fontAwesome() {
+  return src( 'node_modules/@fortawesome/fontawesome-free/webfonts/*' )
+    .pipe( dest( dist + '/assets/fonts/font-awesome/' ) );
+};
 
 // -- JS     --
-gulp.task('js', () => {
-  return gulp.src( paths.js )
+function js() {
+  return src( paths.js )
     .pipe( concat( theme_name + theme_suffix + '.js' ) )
     .pipe( uglify())
     .pipe( rename({
       suffix: '.min'
     }))
-    .pipe( gulp.dest( temp + '/compiled-js' ) );
-});
+    .pipe( dest( temp + '/compiled-js' ) );
+};
 
 // -- PWA Progressive APP --
-gulp.task('pwa', () => {
-  return gulp.src( src + '/pwa/*' )
-    .pipe( gulp.dest( dist ));
-});
+function pwa() {
+  return src( source + '/pwa/*' )
+    .pipe( dest( dist ));
+};
 
 // -- SASS   --
-gulp.task('sass', () => {
-  return gulp.src( paths.sass )
+function sassStyles() {
+  return src( paths.sass )
     .pipe( sass())
-    .pipe( prefixer({
-      browsers: [
-        'last 2 versions',
-        '> 1%',
-        'opera 12.1',
-        'bb 10',
-        'android 4'
-        ]
-      }))
     .pipe( minifyCSS({
         level: {1: {specialComments: 0}}
       }))
     .pipe( rename({
       suffix: '.min'
     }))
-    .pipe( gulp.dest( temp + '/compiled-css' ) )
-    .pipe( gulp.dest( dist + '/assets/css' ) );
-});
+    .pipe( dest( temp + '/compiled-css' ) )
+    .pipe( dest( dist + '/assets/css' ) );
+};
 
 // -- Vendor JS    --
-gulp.task('vendor-js', () => {
-  return gulp.src( paths.vendor_js )
+function vendorJs() {
+  return src( paths.vendor_js )
     .pipe( concat( theme_name + theme_suffix + '-vendor' + '.js' ) )
     .pipe( uglify())
     .pipe( rename({
       suffix: '.min'
     }))
-    .pipe( gulp.dest( temp + '/compiled-js' ) );
-});
+    .pipe( dest( temp + '/compiled-js' ) );
+};
 
 // -- Vendor CSS   --
-gulp.task('vendor-css', () => {
-  return gulp.src( paths.vendor_css )
+function vendorCss() {
+  return src( paths.vendor_css )
     .pipe( concat( theme_name + theme_suffix + '-vendor' + '.css' ) )
     .pipe( minifyCSS({
       level: {1: {specialComments: 0}}
@@ -144,52 +135,56 @@ gulp.task('vendor-css', () => {
     .pipe( rename({
       suffix: '.min'
     }))
-    .pipe( gulp.dest( temp + '/compiled-css' ) );
-});
+    .pipe( dest( temp + '/compiled-css' ) );
+};
 
 // -- Inline CSS   --
-gulp.task('inline-css', ['sass', 'vendor-css'], ()=> {
-  return gulp.src( src + '/html/*' )
+function inlineCss() {
+  return src( source + '/html/*' )
      .pipe( inlinesource() )
      .pipe( htmlmin({
        collapseWhitespace: true
       }))
-     .pipe( gulp.dest( dist ) )
+     .pipe( dest( dist ) )
      .pipe( connect.reload() );
-});
+};
 
 // -- Concat JS   --
-gulp.task('concat-js', ['js', 'vendor-js'], () => {
-  return gulp.src([
+function concatJs () {
+  return src([
     temp + '/compiled-js/the-architect-vendor.min.js',
     temp + '/compiled-js/the-architect.min.js',
-    temp + '/compiled-js/cloudimage.io-responsive.js'
   ])
   .pipe( concat('the-architect-all.min.js') )
-  .pipe( gulp.dest( dist + '/assets/js' ) )
+  .pipe( dest( dist + '/assets/js' ) )
   .pipe( connect.reload() );
-});
+};
 
 // -- WATCH          --
-gulp.task('watch', () => {
-  gulp.watch( src + '/html/*', ['inline-css'] );
-  gulp.watch( src + '/javascript/*', ['concat-js'] );
-  gulp.watch( src + '/scss/*', ['inline-css'] );
-});
+function watchFiles() {
+  watch( source + '/html/*', inlineCss );
+  watch( source + '/javascript/*', series(js, vendorJs, concatJs) );
+  watch( source + '/scss/*', series(sassStyles, vendorCss, inlineCss) );
+};
 
 // ------------------------------
 // -- Project `default` Gulp Task
 // ------------------------------
 
-gulp.task(
-  'default', ['clean-dist', 'clean-tmp'], () => {
-    gulp.start(
-      'connect',
-      'assets',
-      'pwa',
-      'font-awesome',
-      'concat-js',
-      'inline-css',
-      'watch'
-    )
-  });
+exports.default = series(
+  cleanDist,
+  cleanTmp,
+  assets,
+  pwa,
+  fontAwesome,
+  js,
+  vendorJs,
+  concatJs,
+  sassStyles,
+  vendorCss,
+  inlineCss,
+  parallel(
+    watchFiles,
+    connectServer,
+  ),
+);
