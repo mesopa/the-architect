@@ -1,5 +1,5 @@
 
-$(document).ready( function(){
+$(function(){
 
   // ========================
   // Set Main Content Margins
@@ -36,7 +36,7 @@ $(document).ready( function(){
   // Header Animation
   // ================
 
-  $(document).scroll(function(e){
+  $(document).on("scroll", function() {
     if ( !$('header') ) {
       return false;
     }
@@ -64,8 +64,7 @@ $(document).ready( function(){
 // =============
 // CloudImage.io
 // =============
-document.addEventListener('DOMContentLoaded', function() {
-  jScaler.process({
-    TOKEN: 'avuwkbizn'
-  });
+const ciResponsive = new window.CIResponsive({
+  token: 'axcmuiyywq',
+  baseURL: 'https://mesopa.github.io/the-architect/' // optional
 });
