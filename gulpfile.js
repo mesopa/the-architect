@@ -5,7 +5,7 @@
 
 const { src, dest, series, parallel, watch } = require('gulp');
 
-const sass         = require('gulp-sass'),
+const sass         = require('gulp-sass')(require('sass')),
       minifyCSS    = require('gulp-clean-css'),
       rename       = require('gulp-rename'),
       concat       = require('gulp-concat'),
